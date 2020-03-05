@@ -1,6 +1,10 @@
 [package]
-name = "dice"
+name = "roll-dice"
 version = "0.1.0"
+description = "A library for rolling dice"
+keywords = ["dice", "roller", "roll", "game", "dnd"]
+documentation = "https://docs.rs/roll-dice"
+repository = "https://github.com/avikuloff/dice-rs"
 authors = ["Andrey Vikulov <avikuloff@yandex.ru>"]
 license = "MIT"
 edition = "2018"
@@ -9,3 +13,4 @@ edition = "2018"
 
 [dependencies]
 rand = { version = "0.7", features = ["small_rng"] }
+serde = { version = "1.0", features = ["derive"], optional = true }
