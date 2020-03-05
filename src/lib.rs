@@ -1,9 +1,13 @@
 extern crate rand;
+#[cfg(feature = "serde")]
+#[macro_use]
+extern crate serde;
 
 use rand::{Rng, SeedableRng};
 use rand::distributions::Uniform;
 use rand::rngs::SmallRng;
 
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Debug, Clone)]
 pub struct Die(u32);
 
@@ -14,7 +18,12 @@ impl Default for Die {
 }
 
 impl Die {
-    /// Roll a Die. Returns a random number in the range of `sides`.
+    /// Die constructor. `num_sides` is number of sides of the Die
+    pub fn new(num_sides: u32) -> Die {
+        Die(num_sides)
+    }
+
+    /// Roll a Die. Returns a random number in the range of `faces`.
     pub fn roll(&self) -> u32 {
         let mut rng = SmallRng::from_entropy();
 
@@ -22,12 +31,25 @@ impl Die {
     }
 
     /// Number of faces
-    pub fn num_faces(&self) -> u32 {
+    #[allow(dead_code)]
+    pub fn num_sides(&self) -> u32 {
         self.0
     }
 }
 
 /// Roll the Dice and return results of the Roll for each Die.
+///
+/// # Examples
+///
+/// Roll 3d6 `3 six-sided die` and get the sum of the results
+/// ```
+/// use roll_dice::roll;
+///
+/// let rolled = roll(3, 6);
+/// let sum: u32 = rolled.iter().sum();
+///
+/// assert!(sum > 2 && sum < 19)
+/// ```
 pub fn roll(amount: u32, faces: u32) -> Vec<u32> {
     let die = Die(faces);
     let mut results = Vec::with_capacity(amount as usize);
