@@ -1,8 +1,8 @@
 [package]
 name = "roll-dice"
-version = "0.1.0"
+version = "0.2.0"
 description = "A library for rolling dice"
-keywords = ["dice", "roller", "roll", "game", "dnd"]
+keywords = ["dice", "roll"]
 documentation = "https://docs.rs/roll-dice"
 repository = "https://github.com/avikuloff/dice-rs"
 authors = ["Andrey Vikulov <avikuloff@yandex.ru>"]
